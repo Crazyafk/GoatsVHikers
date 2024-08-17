@@ -29,4 +29,9 @@ public class BoardManager : MonoBehaviour
         Vector3Int tilePos = tileMap.WorldToCell(newObject.transform.position);
         boardObjects[tilePos.x, tilePos.y] = newObject;
     }
+    
+    public GameObject GetObjectAtTile(Vector3Int tilePos)
+    {
+        return boardObjects[tilePos.x, tilePos.y];
+    }
 }
