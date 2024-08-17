@@ -43,16 +43,23 @@ public class ClickManager : MonoBehaviour
     /*Called when a tile is clicked.
     */
     void OnTileClicked(Vector3Int tilePos, TileBase tile)
-    {
-        GameObject objectOnTile = boardManager.GetObjectAtTile(tilePos);
-        
-        if(objectOnTile == null){return;}
-        
-        //Activate Hiker Movement Mode
-        if(objectOnTile.CompareTag("Hiker"))
+    {       
+        if(selectedHiker == null) //NO HIKER SELECTED--------------------
         {
-            selectedHiker = tilePos;
-            Debug.Log("Selected Hiker at "+tilePos.ToString());
+            GameObject objectOnTile = boardManager.GetObjectAtTile(tilePos);
+            if(objectOnTile == null){return;}
+            
+            //Activate Hiker Movement Mode
+            if(objectOnTile.CompareTag("Hiker"))
+            {
+                selectedHiker = tilePos;
+
+                //Logging line - left in zombie form because of its moderate complexity - uncomment to enable
+                //Debug.Log("Selected Hiker at "+tilePos.ToString());
+            }
+        }else{                    //HIKER SELECTED------------------------
+            boardManager.AttemptMove((Vector3Int)selectedHiker, tilePos);
+            selectedHiker = null;
         }
     }
 }
