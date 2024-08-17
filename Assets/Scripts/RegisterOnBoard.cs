@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
+RegisterOnBoard class
+This class registers its object with the BoardManager on start.
+*/
 public class RegisterOnBoard : MonoBehaviour
 {
     BoardManager boardManager;

@@ -2,7 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+/*
+BoardManager class
+This Class should be placed on the main tilemap along with the ClickManager.
+Only one instance of this class should exist.
 
+This class stores references to objects such as hikers on the board in its array.
+Objects with the RegisterOnBoard class register automatically on start.
+
+A major functionality of this class is the AttemptMove function which is used when a move should be made.
+*/
 public class BoardManager : MonoBehaviour
 {
     [SerializeField]

@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/*
+ClickManager Class
+This Class should be placed on the main tilemap along with the BoardManager.
+Only one instance of this class should exist.
+
+This class processes clicks - especially clicks on the tilemap. 
+It handles selection of hikers and moving them before putting the request through to BoardManager.
+*/
 public class ClickManager : MonoBehaviour
 {
     Tilemap tileMap;
@@ -41,6 +49,7 @@ public class ClickManager : MonoBehaviour
         }
     }
     /*Called when a tile is clicked.
+    Attempts a move if a hiker is selected, Selects a hiker if otherwise and it is present.
     */
     void OnTileClicked(Vector3Int tilePos, TileBase tile)
     {       
