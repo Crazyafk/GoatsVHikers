@@ -6,11 +6,14 @@ using UnityEngine.Tilemaps;
 public class ClickManager : MonoBehaviour
 {
     Tilemap tileMap;
+    BoardManager boardManager;
+    Vector3Int? selectedHiker = null; //null if no hiker is selected. refers to grid pos of hiker if one is selected.
 
     //Start is called on game load
     void Start()
     {
         tileMap = GetComponent<Tilemap>();
+        boardManager = GetComponent<BoardManager>();
     }
 
     //Update is called once per frame
@@ -41,6 +44,15 @@ public class ClickManager : MonoBehaviour
     */
     void OnTileClicked(Vector3Int tilePos, TileBase tile)
     {
-        Debug.Log(tilePos);
+        GameObject objectOnTile = boardManager.GetObjectAtTile(tilePos);
+        
+        if(objectOnTile == null){return;}
+        
+        //Activate Hiker Movement Mode
+        if(objectOnTile.CompareTag("Hiker"))
+        {
+            selectedHiker = tilePos;
+            Debug.Log("Selected Hiker at "+tilePos.ToString());
+        }
     }
 }
