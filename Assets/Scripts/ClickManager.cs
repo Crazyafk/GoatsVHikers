@@ -52,8 +52,9 @@ public class ClickManager : MonoBehaviour
     Attempts a move if a hiker is selected, Selects a hiker if otherwise and it is present.
     */
     void OnTileClicked(Vector3Int tilePos, TileBase tile)
-    {       
-        if(selectedHiker == null) //NO HIKER SELECTED--------------------
+    {
+        Debug.Log(tilePos.ToString());
+        if (selectedHiker == null) //NO HIKER SELECTED--------------------
         {
             GameObject objectOnTile = boardManager.GetObjectAtTile(tilePos);
             if(objectOnTile == null){return;}
@@ -64,7 +65,7 @@ public class ClickManager : MonoBehaviour
                 selectedHiker = tilePos;
 
                 //Logging line - left in zombie form because of its moderate complexity - uncomment to enable
-                //Debug.Log("Selected Hiker at "+tilePos.ToString());
+                Debug.Log("Selected Hiker at "+tilePos.ToString());
             }
         }else{                    //HIKER SELECTED------------------------
             boardManager.AttemptMove((Vector3Int)selectedHiker, tilePos);

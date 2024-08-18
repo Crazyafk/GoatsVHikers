@@ -54,28 +54,29 @@ public class BoardManager : MonoBehaviour
     public void AttemptMove(Vector3Int fromPos, Vector3Int toPos)
     {
         //Logging line - left in zombie form because of its moderate complexity - uncomment to enable
-        //Debug.Log("Move attempted from "+fromPos.ToString()+" to "+toPos.ToString());
-        
+        Debug.Log("Move attempted from " + fromPos.ToString() + " to " + toPos.ToString());
+
         //Get and verify moving object
         GameObject movingObject = GetObjectAtTile(fromPos);
-        if(movingObject == null){throw new System.InvalidOperationException("No Object at fromPos");}
+        if (movingObject == null) { throw new System.InvalidOperationException("No Object at fromPos"); }
 
         //---------Verification---------
         bool verified = false;
         //Hiker Verification
-        if(movingObject.CompareTag("Hiker"))
+        if (movingObject.CompareTag("Hiker"))
         {
             verified = movingObject.GetComponent<HikerCanMove>().CanMove(fromPos, toPos);
         }
 
-        if(!verified){return;}
+        if (!verified) { return; }
 
         //----------Execution------------
         //This currently assumes no extra pieces on the board - different behaviour required if so (e.g. attacks)
-        
+
         boardObjects[toPos.x, toPos.y] = movingObject;
         boardObjects[fromPos.x, fromPos.y] = null;
 
-        movingObject.transform.position = tileMap.GetCellCenterWorld(toPos);
+        Vector3 worldPos = tileMap.GetCellCenterWorld(toPos);
+        movingObject.transform.position = new Vector3(worldPos.x, worldPos.y, 0f);
     }
-}
+    }
